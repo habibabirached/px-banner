@@ -1,0 +1,93 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
+<link rel="import" href="../iron-collapse/iron-collapse.html" />
+
+<link rel="import" href="css/px-banner-styles.html">
+
+<dom-module id="px-banner">
+    <template>
+        <style include="px-banner-styles"></style>
+        <style include="px-theme-styles"></style>
+        <div id="notificationContent" class="notificationContent epsilon">
+      <span class="messageContainer">
+        {{notificationMessage}}
+        <template is="dom-if" if = "{{notificationDetails}}">
+          <span class="actionable actionable--large actionable--action" on-click="_showDetails"> X </span>
+        </template>
+      </span>
+
+            <!--<button class="notificationHeaderTitle epsilon" on-click="toggleNotificationHeader" data-button-icon="<iron-icon icon='fa:fa-angle-down'></iron-icon>'">{{notificationHeaderText}}</button>
+            <iron-collapse id="notificationHeader" >
+              <div class="notificationMessageContainer">
+                {{notificationMessage}}
+              </div>
+            </iron-collapse>-->
+        </div>
+    </template>
+</dom-module>
+
+<script type="text/javascript">
+    var mesg = 3;
+    Polymer({
+        is: 'px-banner',
+        properties:{
+            notificationHeaderText:{
+                type: String,
+                notify: true,
+                value: "Warning"
+            },
+            notificationMessage:{
+                type: String,
+                value: "",
+                notify: true,
+                observer: '_messageChange'
+            },
+            notificationDetails:{
+                type: String,
+                value: "  X  "
+            },
+            notificationLevel:{
+                type: String,
+                notify: true,
+                value: "warning",
+                observer: '_notificationLevelChange'
+            }
+        },
+        attached: function(){
+        },
+        toggleNotificationHeader: function(){
+            this.$.notificationHeader.toggle();
+        },
+        _notificationLevelChange: function(){
+            if(this.notificationLevel.toLowerCase()  == "warning"){
+                this.$.notificationContent.classList.remove("error-level");
+                this.$.notificationContent.classList.remove("success-level");
+                this.$.notificationContent.classList.add("warning-level");
+            }else if(this.notificationLevel.toLowerCase()  == "error"){
+                this.$.notificationContent.classList.remove("warning-level");
+                this.$.notificationContent.classList.remove("success-level");
+                this.$.notificationContent.classList.add("error-level");
+            }else if(this.notificationLevel.toLowerCase()  == "success"){
+                this.$.notificationContent.classList.remove("warning-level");
+                this.$.notificationContent.classList.remove("error-level");
+                this.$.notificationContent.classList.add("success-level");
+            }
+        },
+
+        _messageChange: function(){
+            var x = document.getElementById("notificationContent");
+            if (x!= null)
+                x.style.display = "block";
+        },
+        _showDetails: function(){
+            var x = document.getElementById("notificationContent");
+            x.style.display = "none";
+            /*
+             var lPopup = window.open("", "", "width=640,height=480,resizeable,scrollbars");
+             if(lPopup){
+             lPopup.document.write("<p>"+ this.notificationDetails+"</p>");
+             }  */
+        }
+    });
+
+</script>
