@@ -1,0 +1,17 @@
+{
+  "name": "px-banner",
+  "authors": [
+    "Habib Abi-Rached <abirached@ge.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
