@@ -12,16 +12,16 @@
       <span class="messageContainer">
         {{notificationMessage}}
         <template is="dom-if" if = "{{notificationDetails}}">
-          <span class="actionable actionable--large actionable--action" on-click="_showDetails"> X </span>
+          <span class="actionable actionable--large actionable--action" on-click="_killBanner">  --Dismiss-- </span>
         </template>
       </span>
-            
+
         </div>
     </template>
 </dom-module>
 
 <script type="text/javascript">
-    var mesg = 3;
+    var mesg = 0;
     Polymer({
         is: 'px-banner',
         properties:{
@@ -38,7 +38,7 @@
             },
             notificationDetails:{
                 type: String,
-                value: "  X  "
+                value: "   -Dismiss-  "
             },
             notificationLevel:{
                 type: String,
@@ -48,6 +48,14 @@
             }
         },
         attached: function(){
+            var x = document.getElementById("notificationContent");
+            x.style.display = "none";
+
+        },
+        ready: function(){
+            var x = document.getElementById("notificationContent");
+            x.style.display = "none";
+
         },
         toggleNotificationHeader: function(){
             this.$.notificationHeader.toggle();
@@ -70,10 +78,10 @@
 
         _messageChange: function(){
             var x = document.getElementById("notificationContent");
-            if (x!= null)
+            if ((x!= null) && (this.notificationMessage !="" ))
                 x.style.display = "block";
         },
-        _showDetails: function(){
+        _killBanner: function(){
             var x = document.getElementById("notificationContent");
             x.style.display = "none";
             /*
