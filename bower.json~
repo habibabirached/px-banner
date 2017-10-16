@@ -13,5 +13,14 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+"dependencies": {
+    "polymer": "^1.6.1",
+    "iron-icon": "^1.0.12",
+    "px-polymer-font-awesome": "^1.1.0"
+  },
+  "devDependencies": {
+    "px-starter-kit-design": "^0.7.0",
+    "px-demo": "^1.4.6"
+  }
 }
